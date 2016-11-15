@@ -1,0 +1,9 @@
+
+
+
+在计算机科学中, data(数据)就是一切，因为它对于计算机的意义重大。
+JavaScript提供七种不同的data types(数据类型)，
+
+它们是undefined（未定义）, null（空）, boolean（布尔型）, string（字符串）, symbol(符号), number（数字）, and object（对象）。
+
+Variable （变量）的名字可以由数字、字母、$ 或者 _组成，但是不能包含空格或者以数字为首。
