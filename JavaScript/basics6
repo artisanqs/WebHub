@@ -1,0 +1,280 @@
+
+
+6.1
+做判断（if语句）
+
+if语句是基于条件成立才执行相应代码时使用的语句。
+
+语法:
+
+if(条件)
+{ 条件成立时执行代码}
+注意：if小写，大写字母（IF）会出错！
+
+假设你应聘web前端技术开发岗位，如果你会HTML技术，你面试成功，欢迎加入公司。代码表示如下:
+
+<script type="text/javascript">
+  var mycarrer = "HTML";
+  if (mycarrer == "HTML")
+  {
+    document.write("你面试成功，欢迎加入公司。");
+  }
+</script>
+
+
+6.2
+二选一 （if...else语句）
+
+if...else语句是在指定的条件成立时执行代码，在条件不成立时执行else后的代码。
+
+语法:
+
+if(条件)
+{ 条件成立时执行的代码}
+else
+{条件不成立时执行的代码}
+假设你应聘web前端技术开发岗位，如果你会HTML技术，你面试成功，欢迎加入公司，否则你面试不成功，不能加入公司。
+
+代码表示如下:
+
+<script type="text/javascript">
+  var mycarrer = "HTML"; //mycarrer变量存储技能
+  if (mycarrer == "HTML")
+    { document.write("你面试成功，欢迎加入公司。");  }
+  else  //否则，技能不是HTML
+    { document.write("你面试不成功，不能加入公司。");}
+</script>
+
+
+6.3
+多重判断（if..else嵌套语句）
+
+
+要在多组语句中选择一组来执行，使用if..else嵌套语句。
+
+语法:
+
+if(条件1)
+{ 条件1成立时执行的代码}
+else  if(条件2)
+{ 条件2成立时执行的代码}
+...
+else  if(条件n)
+{ 条件n成立时执行的代码}
+else
+{ 条件1、2至n不成立时执行的代码}
+
+eg:
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>if...else</title>
+<script type="text/JavaScript">
+var myage =99;//赵红的年龄为99
+if(myage<=44)
+  {document.write("青年");}
+else if(myage<=59) 
+  {document.write("中年人");}
+else if (myage<=89)
+  {document.write("老年人");}
+else  
+  {document.write("长寿老年人");}
+</script>
+</head>
+<body>
+</body>
+</html>
+
+
+
+6.4
+
+多种选择（Switch语句)
+
+当有很多种选项的时候，switch比if else使用更方便。
+
+语法:
+
+switch(表达式)
+{
+case值1:
+  执行代码块 1
+  break;
+case值2:
+  执行代码块 2
+  break;
+...
+case值n:
+  执行代码块 n
+  break;
+default:
+  与 case值1 、 case值2...case值n 不同时执行的代码
+}
+语法说明:
+
+Switch必须赋初始值，值与每个case值匹配。满足执行该 case 后的所有语句，并用break语句来阻止运行下一个case。
+如所有case值都不匹配，执行default后的语句。
+
+6.5
+重复重复（for循环）
+
+很多事情不只是做一次，要重复做。如打印10份试卷，每次打印一份，重复这个动作，直到打印完成。
+这些事情，我们使用循环语句来完成，循环语句，就是重复执行一段代码。
+
+for语句结构：
+
+for(初始化变量;循环条件;循环迭代)
+{     
+    循环语句 
+ }
+假如，一个盒子里有6个球，我们每次取一个，重复从盒中取出球，直到球取完为止。
+
+<script type="text/javascript">
+var num=1;
+for (num=1;num<=6;num++)  //初始化值；循环条件；循环后条件值更新
+{   document.write("取出第"+num+"个球<br />");
+}
+</script>
+
+
+6.6
+反反复复(while循环)
+
+和for循环有相同功能的还有while循环, while循环重复执行一段代码，直到某个条件不再满足。
+
+while语句结构：
+
+while(判断条件)
+{
+    循环语句
+ }
+使用while循环，完成从盒子里取球的动作，每次取一个，共6个球。
+
+<script type="text/javascript">
+var num=0;  //初始化值
+while (num<=6)   //条件判断
+{
+  document.write("取出第"+num+"个球<br />");
+  num=num+1;  //条件值更新
+}
+</script>
+
+6.7
+来来回回(Do...while循环)
+
+do while结构的基本原理和while结构是基本相同的，但是它保证循环体至少被执行一次。因为它是先执行代码，后判断条件，如果条件为真，继续循环。
+
+do...while语句结构：
+
+do
+{
+    循环语句
+ }
+while(判断条件)
+我们试着输出5个数字。
+
+<script type="text/javascript">
+   num= 1;
+   do
+   {
+     document.write("数值为:" +  num+"<br />");
+     num++; //更新条件
+   }
+   while (num<=5)
+</script>
+
+6.8
+
+退出循环break
+
+在while、for、do...while、while循环中使用break语句退出当前循环，直接执行后面的代码。
+
+格式如下：
+
+for(初始条件;判断条件;循环后条件值更新)
+{
+  if(特殊情况)
+  {break;}
+  循环代码
+}
+当遇到特殊情况的时候，循环就会立即结束。看看下面的例子，输出10个数，如果数值为5，就停止输出。
+
+6.9
+继续循环continue
+
+continue的作用是仅仅跳过本次循环，而整个循环体继续执行。
+
+语句结构：
+
+for(初始条件;判断条件;循环后条件值更新)
+{
+  if(特殊情况)
+  { continue; }
+ 循环代码
+}
+上面的循环中，当特殊情况发生的时候，本次循环将被跳过，而后续的循环则不会受到影响。好比输出10个数字，如果数字为5就不输出了。
+
+
+综合练习：
+任务
+第一步： 把这些数据组成一个数组，方便我们之后操作哦。
+
+提示: 使用二维数组。
+第二步： 筛选数据吧，首先找出都是大一的所有信息 ;
+
+第三步： 最后再一次筛选上一步得到的数据，打印出都是女生的姓名 ;
+
+提示: 可以用switch 或 if 语句进行筛选。
+
+eg代码：
+<!DOCTYPE  HTML>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>流程控制语句</title>
+<script type="text/javascript">
+
+ //第一步把之前的数据写成一个数组的形式,定义变量为 infos
+ 
+   var infos = 
+ [
+    ['小A','女',21,'大一'],
+    ['小B','男',23,'大三'],
+    ['小C','男',24,'大四'],
+	['小D','女',21,'大一'],
+	['小E','女',22,'大四'],
+    ['小F','男',21,'大一'],
+	['小G','女',22,'大二'],
+	['小H','女',20,'大三'],
+	['小I','女',20,'大一'],
+	['小J','男',20,'大三']
+  ];
+
+ //第一次筛选，找出都是大一的信息
+ 
+  var arr1 = [];
+   var n = 0;
+   for(var i=0;i<infos.length;i++){ 
+    	if( infos[i][3] == "大一" ){  
+		   arr1[n] = infos[i];
+		    document.write(arr1[n]+"<br/>");
+		   n=n+1;
+		    
+		}  
+   }
+   
+   document.write("大一人数: "+arr1.length+"<br/>");  
+  
+ //第二次筛选，找出都是女生的信息
+ 
+       for(var i=0;i<arr1.length;i++){ 
+        //这里可以用switch  
+    	if(arr1[i][1]=='女')
+		{ document.write(arr1[i][0]+"<br/>");}
+	}      
+</script>
+</head>
+<body>
+</body>
+</html>
