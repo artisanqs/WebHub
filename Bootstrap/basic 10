@@ -1,0 +1,277 @@
+
+
+按钮（按钮组）
+单个按钮在Web页面中的运用有时候并不能满足我们的业务需求，常常会看到将多个按钮组合在一起使用，比如富文本编辑器里的一组小图标按钮等。
+那么在这一节中，我们主要向大家介绍Bootstrap框架为大家提供的按钮组组件。
+
+源码查询：
+
+按钮组也是一个独立的组件，所以可以找到对应的源码文件：
+
+  ☑  LESS版本：对应的源文件为buttons.less
+
+  ☑  Sass版本：对应的源文件为_buttons.scss
+
+  ☑  CSS版本：对应bootstrap.css文件第3131行～第3291行
+
+使用方法：
+
+按钮组和下拉菜单组件一样，需要依赖于button.js插件才能正常运行。不过我们同样可以直接只调用bootstrap.js文件。因为这个文件已集成了button.js插件功能。
+
+对于结构方面，非常的简单。使用一个名为“btn-group”的容器，把多个按钮放到这个容器中。如下所示：
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default">
+     <span class="glyphicon glyphicon-step-backward"></span>
+  </button>
+   …
+  <button type="button" class="btn btn-default">
+     <span class="glyphicon glyphicon-step-forward"></span>
+  </button>
+</div>
+
+
+
+
+除了可以使用<button>元素之外，还可以使用其他标签元素，比如<a>标签。唯一要保证的是：不管使用什么标签，“.btn-group”容器里的标签元素需要带有类名“.btn”。
+
+按钮组实现源码如下：
+
+/*查看bootstrap.css文件第3131行～第3161行*/
+
+.btn-group,
+.btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-group > .btn,
+.btn-group-vertical > .btn {
+  position: relative;
+  float: left;
+}
+.btn-group > .btn:hover,
+.btn-group-vertical > .btn:hover,
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus,
+.btn-group > .btn:active,
+.btn-group-vertical > .btn:active,
+.btn-group > .btn.active,
+.btn-group-vertical > .btn.active {
+  z-index: 2;
+}
+.btn-group > .btn:focus,
+.btn-group-vertical > .btn:focus {
+  outline: none;
+}
+.btn-group .btn + .btn,
+.btn-group .btn + .btn-group,
+.btn-group .btn-group + .btn,
+.btn-group .btn-group + .btn-group {
+   margin-left: -1px;
+}
+从效果图上我们可以看出，按钮组四个角都是圆角（支持CSS3的浏览器），但有的小伙伴会问，我们平常制作网页时每个按钮都是带有圆角，
+而在按钮组中的按钮，除了第一个和最后一个具有边上的圆角之外，其他的按钮没有圆角，它是怎么实现的呢？其实实现方法非常简单：
+
+  1、默认所有按钮都有圆角
+
+  2、除第一个按钮和最后一个按钮（下拉按钮除外），其他的按钮都取消圆角效果
+
+  3、第一个按钮只留左上角和左下角是圆角
+
+  4、最后一个按钮只留右上角和右下角是圆角
+
+对应的源码如下：
+
+/*查看bootstrap.css文件第3174行～第3203行*/
+
+.btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.btn-group > .btn:first-child {
+  margin-left: 0;
+}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn:last-child:not(:first-child),
+.btn-group > .dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child> .btn:last-child,
+.btn-group > .btn-group:first-child> .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn-group:last-child> .btn:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+
+
+按钮（按钮工具栏）
+
+那么Bootstrap框架按钮工具栏也提供了这样的制作方法，你只需要将按钮组“btn-group”按组放在一个大的容器“btn-toolbar”中，如下所示：
+
+<div class="btn-toolbar">
+  <div class="btn-group">
+    …
+  </div>
+  <div class="btn-group">
+    …
+  </div>
+  <div class="btn-group">
+    …
+  </div>
+  <div class="btn-group">
+    …
+  </div>
+</div>
+实现原理主要是让容器的多个分组“btn-group”元素进行浮动，并且组与组之前保持5px的左外距。代码如下：
+
+/*源码请查阅bootstrap.css文件第3162行～第3173行*/
+
+.btn-toolbar {
+  margin-left: -5px;
+}
+.btn-toolbar .btn-group,
+.btn-toolbar .input-group {
+  float: left;
+}
+.btn-toolbar > .btn,
+.btn-toolbar > .btn-group,
+.btn-toolbar > .input-group {
+  margin-left: 5px;
+}
+注意在”btn-toolbar”上清除浮动。
+
+/*源码请查阅bootstrap.css文件第5062行*/
+
+.btn-toolbar:before,
+.btn-toolbar:after｛
+　display: table;
+content: " ";
+｝
+.btn-toolbar:after{
+  clear: both;
+}
+
+按钮组大小设置
+
+在介绍按钮一节中，我们知道按钮是通过btn-lg、btn-sm和btn-xs三个类名来调整padding、font-size、line-height和border-radius属性值来改变按钮大小。那么按钮组的大小，我们也可以通过类似的方法：
+
+  ☑  .btn-group-lg:大按钮组
+
+  ☑  .btn-group-sm:小按钮组
+
+  ☑  .btn-group-xs:超小按钮组
+
+只需要在“.btn-group”类名上追加对应的类名，就可以得到不同大小的按钮组。如下所示：
+
+<div class="btn-toolbar">
+  <div class="btn-group btn-group-lg">
+    …
+  </div>
+  <div class="btn-group">
+    …
+  </div>
+  <div class="btn-group btn-group-sm">
+    …
+  </div>
+  <div class="btn-group btn-group-xs">
+   …
+  </div>
+</div>
+
+/*源码请查阅bootstrap.css文件第2320行～第2340行*/
+
+.btn-lg,
+.btn-group-lg> .btn{
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.btn-sm,
+.btn-group-sm> .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.btn-xs,
+.btn-group-xs> .btn{
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+
+按钮（嵌套分组）
+使用的时候，只需要把当初制作下拉菜单的“dropdown”的容器换成“btn-group”，并且和普通的按钮放在同一级。如下所示：
+
+<div class="btn-group">
+<button class="btnbtn-default" type="button">首页</button>
+<button class="btnbtn-default" type="button">产品展示</button>
+<button class="btnbtn-default" type="button">案例分析</button>
+<button class="btnbtn-default" type="button">联系我们</button>
+<div class="btn-group">
+   <button class="btnbtn-default dropdown-toggle" data-toggle="dropdown" type="button">关于我们<span class="caret"></span></button>
+   <ul class="dropdown-menu">
+         <li><a href="##">公司简介</a></li>
+         <li><a href="##">企业文化</a></li>
+         <li><a href="##">组织结构</a></li>
+         <li><a href="##">客服服务</a></li>
+    </ul>
+</div>
+</div>
+实现的样式代码：
+
+/*查看bootstrap.css文件第3192行～第3223行*/
+
+.btn-group > .btn-group {
+  float: left;
+}
+.btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.btn-group > .btn-group:first-child> .btn:last-child,
+.btn-group > .btn-group:first-child> .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-group > .btn-group:last-child> .btn:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.btn-group .dropdown-toggle:active,
+.btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.btn-group > .btn-lg + .dropdown-toggle {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+.btn-group.open .dropdown-toggle.btn-link {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+ 
