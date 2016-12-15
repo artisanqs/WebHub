@@ -1,0 +1,232 @@
+
+
+导航条基础
+导航条（navbar）和上一节介绍的导航（nav），就相差一个字，多了一个“条”字。其实在Bootstrap框架中他们还是明显的区别。
+在导航条(navbar)中有一个背景色、而且导航条可以是纯链接（类似导航），也可以是表单，还有就是表单和导航一起结合等多种形式。
+在这一节中将一起探讨Bootstrap框架中导航条的使用。
+
+导航条和导航一样，在Bootstrap框架中是一个独立组件，所以你也可以根据自己的需求使用不同的版本：
+
+LESS版本：对应的源文件navbar.less
+Sass版本：对应的源文件_navbar.scss
+编译后的版本：查看bootstrap.css文件第3642行～第4111行（注意这个所说的Bootstrap版本是3.1.1，其它版本位置是不一致的），
+这五百多行代码已从原文中节取出来，放在右侧代码顶部“bootstrap.css”文件中，小伙伴们可以查看。
+
+
+基础导航条
+
+在Bootstrap框中，导航条和导航从外观上差别不是太多，但在实际使用中导航条要比导航复杂得多。我们先来看导航条中最基础的一个——基础导航条。
+
+使用方法：
+
+在制作一个基础导航条时，主要分以下几步：
+
+第一步：首先在制作导航的列表(<ul class=”nav”>)基础上添加类名“navbar-nav”
+
+第二步：在列表外部添加一个容器（div），并且使用类名“navbar”和“navbar-default”
+
+示例查看右侧代码编辑（10-19行）。
+
+“.navbar”样式的主要功能就是设置左右padding和圆角等效果，但他和颜色相关的样式没有进行任何的设置。其主要源码如下：
+
+/*源码查看bootstrap.css文件第3642行～第3647行*/
+
+.navbar {
+  position: relative;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+原理分析：
+
+而导航条的颜色都是通过“.navbar-default”来进行控制：
+
+/*源码查看bootstrap.css文件第3940行～第3943行*/
+
+.navbar-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+}
+navbar-nav样式是在导航.nav的基础上重新调整了菜单项的浮动与内外边距。同时也不包括颜色等样式设置，
+源码请查看bootstrap.css文件第3785行～第3830行，我们把代码节选出来放入右侧bootstrap.css中。
+
+而颜色和其他样式是通过配合父容器“navbar-default”来一起实现：
+
+/*源码请查看bootstrap.css文件第3955行～第3974行*/
+
+.navbar-default .navbar-nav> li > a {
+  color: #777;
+}
+.navbar-default .navbar-nav> li >a:hover,
+.navbar-default .navbar-nav> li >a:focus {
+  color: #333;
+  background-color: transparent;
+}
+.navbar-default .navbar-nav> .active > a,
+.navbar-default .navbar-nav> .active >a:hover,
+.navbar-default .navbar-nav> .active >a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+.navbar-default .navbar-nav> .disabled > a,
+.navbar-default .navbar-nav> .disabled >a:hover,
+.navbar-default .navbar-nav> .disabled >a:focus {
+  color: #ccc;
+  background-color: transparent;
+}
+
+
+
+为导航条添加标题、二级菜单及状态
+加入导航条标题
+
+在Web页面制作中，常常在菜单前面都会有一个标题（文字字号比其它文字稍大一些），其实在Bootstrap框架也为大家做了这方面考虑，
+其通过“navbar-header”和“navbar-brand”来实现，示例查看代码编辑器（11-22）。
+
+原理分析：
+
+此功能主要起一个提醒功能，当然改良一下可以当作是logo(此处不做过多阐述)。其样式主要是加大了字体设置，并且设置了最大宽度：
+
+/*源码查看bootstrap.css文件第3739行～第3755行*/
+
+.navbar-brand {
+float: left;
+height: 50px;
+padding: 15px 15px;
+font-size: 18px;
+line-height: 20px;
+}
+.navbar-brand:hover,
+.navbar-brand:focus {
+text-decoration: none;
+}
+@media (min-width: 768px) {
+.navbar> .container .navbar-brand,
+.navbar> .container-fluid .navbar-brand {
+margin-left: -15px;
+}
+}
+同样在默认导航条（navbar-default）下，对navbar-brand也做了颜色处理：
+
+/*源码请查看bootstrap.css文件第3947行～3951行*/
+
+.navbar-default .navbar-brand {
+color: #777;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+color: #5e5e5e;
+background-color: transparent;
+}
+导航条状态、二级菜单
+
+同样的，在基础导航条中对菜单提供了当前状态，禁用状态，悬浮状态等效果，而且也可以带有二级菜单的导航条，案例代码见右侧代码编辑器（24-42行）。
+
+
+
+带表单的导航条
+在Bootstrap框架中提供了一个“navbar-form”，使用方法很简单，在navbar容器中放置一个带有navbar-form类名的表单，示例代码编辑器（29-34行）。
+
+实现导航条表单的样式代码源码请查看bootstrap.css文件第3839行～第3904行，我们也对60多行样式代码节选了出来放到右侧bootstrap.css文件中，
+有兴趣的同学请查看。
+
+在上面的示例中，大家看到了“navbar-left”让表单左浮动，更好实现对齐。在Bootstrap框架中，还提供了“navbar-right”样式，让元素在导航条靠右对齐。
+
+/*源码请查看bootstrap.css文件第3831行～第3838行*/
+
+@media (min-width: 768px) {
+ .navbar-left {
+ float: left !important;
+}
+.navbar-right {
+ float: right !important;
+ }
+}
+注意：这里有一个条件，只有当浏览器视窗宽度大于768px生效。
+
+
+导航条中的按钮、文本和链接
+
+Bootstrap框架的导航条中除了使用navbar-brand中的a元素和navbar-nav的ul和navbar-form之外，还可以使用其他元素。框架提供了三种其他样式：
+
+1、导航条中的按钮navbar-btn
+
+2、导航条中的文本navbar-text
+
+3、导航条中的普通链接navbar-link
+
+但这三种样式在框架中使用时受到一定的限制，需要和navbar-brand、navbar-nav配合起来使用。而且对数量也有一定的限制，
+一般情况在使用一到两个不会有问题，超过两个就会有问题。
+
+先来看看这三种样式对应的源码：
+
+/*源码请查看bootstrap.css文件第3914行～第3939行*/
+
+.navbar-btn {
+margin-top: 8px;
+margin-bottom: 8px;
+}
+.navbar-btn.btn-sm {
+margin-top: 10px;
+margin-bottom: 10px;
+}
+.navbar-btn.btn-xs {
+margin-top: 14px;
+margin-bottom: 14px;
+}
+.navbar-text {
+margin-top: 15px;
+margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+.navbar-text {
+float: left;
+margin-right: 15px;
+margin-left: 15px;
+  }
+.navbar-text.navbar-right:last-child {
+margin-right: 0;
+  }
+
+}
+/*bootstrap.css文件第3952行～第3954行*/
+
+.navbar-default .navbar-text {
+  color: #777;
+}
+/*bootstrap.css文件第4035行～第4037行*/
+
+.navbar-inverse .navbar-text {
+color: #999;
+}
+/*boostrap.css文件第4017行～第4022行*/
+
+.navbar-default .navbar-link {
+color: #777;
+}
+.navbar-default .navbar-link:hover {
+color: #333;
+}
+/*bootstrap.css文件第4106行～第4111行*/
+
+.navbar-inverse .navbar-link {
+color: #999;
+}
+.navbar-inverse .navbar-link:hover {
+color: #fff;
+}
+navbar-btn和navbar-link在上一小节已经讲过，现在我们来看一下navbar-text的一个简单应用（见右侧代码编辑区11-20行）
+
+在结果窗口中查看效果，可以看出明显的存在问题，通过浏览器调试工具，可以看到a标签有margin-top和margin-bottom的值为15px，欲将其对齐，
+我们将上面的结构做一定的调整：
+
+<div class="navbar navbar-default" role="navigation">
+　<div class="navbar-header">
+　    <a href="##" class="navbar-brand">慕课网</a>
+　</div>
+  <div class="nav navbar-nav">
+      <a href="##" class="navbar-text">Navbar Text</a>
+      <a href="##" class="navbar-text">Navbar Text</a>
+      <a href="##" class="navbar-text">Navbar Text</a>
+  </div>
+</div>
