@@ -1,0 +1,232 @@
+
+
+
+固定导航条
+很多情况之一，设计师希望导航条固定在浏览器顶部或底部，这种固定式导航条的应用在移动端开发中更为常见。Bootstrap框架提供了两种固定导航条的方式：
+
+   ☑  .navbar-fixed-top：导航条固定在浏览器窗口顶部
+
+   ☑  .navbar-fixed-bottom：导航条固定在浏览器窗口底部
+
+使用方法很简单，只需要在制作导航条最外部容器navbar上追加对应的类名即可：
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+　…
+</div>
+<div class="content">我是内容</div>
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+　…
+</div>
+实现原理：
+
+实现原理很简单，就是在navbar-fixed-top和navbar-fixed-bottom使用了position：fixed属性，
+并且设置navbar-fixed-top的top值为0,而navbar-fixed-bottom的bottom值为0。具体的源码如下：
+
+/*源码请查看bootstrap.css文件第3717 行～第3738行*/
+
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+@media (min-width: 768px) {
+.navbar-fixed-top,
+.navbar-fixed-bottom {
+  border-radius: 0;
+  }
+}
+.navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+}
+.navbar-fixed-bottom {
+  bottom: 0;
+  margin-bottom: 0;
+  border-width: 1px 0 0;
+}
+存在bug及解决方法:
+
+从运行效果中大家不难发现，页面主内容顶部和底部都被固定导航条给遮住了。为了避免固定导航条遮盖内容，我们需要在body上做一些处理：
+
+body {
+  padding-top: 70px;/*有顶部固定导航条时设置*/
+  padding-bottom: 70px;/*有底部固定导航条时设置*/
+}
+因为固定导航条默认高度是50px，我们一般设置padding-top和padding-bottom的值为70px，当然有的时候还是需要具体情况具体分析。
+
+第二种解决这个bug方法：
+
+其实除了这种解决方案之外，我们还有其他的解决方法，把固定导航条都放在页面内容前面：
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+　…
+</div>
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+　…
+</div>
+<div class="content">我是内容</div>
+在文件中添加下列样式代码：
+
+.navbar-fixed-top ~ .content {
+   padding-top: 70px;
+}
+.navbar-fixed-bottom ~ .content {
+  padding-bottom: 70px;
+}
+当然，这种方法有的时候也是需要具体情况具体分析的。
+
+
+
+响应式导航条
+那么在这一节中，主要和大家探讨如何使用Bootstrap框架实现响应式导航条效果。
+
+先来看HTML结构见右侧代码区。
+
+使用方法：
+
+1、保证在窄屏时需要折叠的内容必须包裹在带一个div内，并且为这个div加入collapse、navbar-collapse两个类名。最后为这个div添加一个class类名或者id名。
+
+2、保证在窄屏时要显示的图标样式（固定写法）：
+
+<button class="navbar-toggle" type="button" data-toggle="collapse">
+  <span class="sr-only">Toggle Navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+3、并为button添加data-target=".类名/#id名"，究竞是类名还是id名呢？由需要折叠的div来决定。如：
+
+需要折叠的div代码段：
+
+<div class="collapse navbar-collapse" id="example">
+      <ul class="nav navbar-nav">
+      …
+      </ul>
+</div>
+窄屏时显示的图标代码段：
+
+<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#example">
+  ...
+</button>
+也可以这么写，需要折叠的div代码段：
+
+<div class="collapse navbar-collapse example" >
+      <ul class="nav navbar-nav">
+      …
+      </ul>
+</div>
+窄屏时要显示的图标：
+
+<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".example">
+  ...
+</button>
+
+
+
+反色导航条
+反色导航条其实是Bootstrap框架为大家提供的第二种风格的导航条，与默认的导航条相比，使用方法并无区别，只是将navbar-deafult类名换成navbar-inverse。其变化只是导航条的背景色和文本做了修改。如下：
+
+<div class="navbar  navbar-inverse" role="navigation">
+<div class="nav bar-header">
+      <a href="##" class="navbar-brand">慕课网</a>
+</div>
+<ul class="nav navbar-nav">
+      <li class="active"><a href="">首页</a></li>
+      <li><a href="">教程</a></li>
+      <li><a href="">关于我们</a></li>
+</ul>
+</div>
+运行效果如下：
+
+对应的源码，请查看bootstrap.css文件第4023行～第4111行（注意这个所说的Bootstrap版本是3.1.1，其它版本位置是不一致的），
+这80多行代码已从原文中节取出来，存放在右侧代码顶部“bootstrap.css”文件中，小伙伴们可以查看。
+
+
+分页导航（带页码的分页导航）
+分页导航几乎在哪个网站都可见。好的分页导航能给用户带来更好的用户体验。在Bootstrap框架中提供了两种分页导航：
+
+   ☑   带页码的分页导航
+
+   ☑   带翻页的分页导航
+
+带页码的分页导航
+
+带页码的分页导航，可能是最常见的一种分页导航，特别是在列表页内容超多的时候，会给用户提供分页的导航方式。在Bootstrap框架为开发者提供不同的版本：
+
+   ☑   LESS版本：对应的源文件pagination.less
+
+   ☑   Sass版本：对应的源文件_pagination.scss
+
+   ☑   编译后版本：对应bootstrap.css文件第4130行～第4222行
+
+使用方法：
+
+平时很多同学喜欢用div>a和div>span结构来制作带页码的分页导航。不过，在Bootstrap框架中使用的是ul>li>a这样的结构，在ul标签上加入pagination方法：
+
+<ul class="pagination">
+   <li><a href="#">&laquo;</a></li>
+   <li><a href="#">1</a></li>
+   <li><a href="#">2</a></li>
+   <li><a href="#">3</a></li>
+   <li><a href="#">4</a></li>
+   <li><a href="#">5</a></li>
+   <li><a href="#">&raquo;</a></li>
+</ul>
+
+
+实现原理：
+
+从效果中可以看出，当前状态页码会高亮显示，而且不能点击。而最后一页是禁用状态，也不能点击。实现样式：
+
+/*bootstrap.css文件第4170行~第4192行*/
+
+.pagination> .active > a,
+.pagination> .active > span,
+.pagination> .active >a:hover,
+.pagination> .active >span:hover,
+.pagination> .active >a:focus,
+.pagination> .active >span:focus {
+z-index: 2;
+color: #fff;
+cursor: default;
+background-color: #428bca;
+border-color: #428bca;
+}
+.pagination> .disabled > span,
+.pagination> .disabled >span:hover,
+.pagination> .disabled >span:focus,
+.pagination> .disabled > a,
+.pagination> .disabled >a:hover,
+.pagination> .disabled >a:focus {
+color: #999;
+cursor: not-allowed;
+background-color: #fff;
+border-color: #ddd;
+}
+注意：要禁用当前状态和禁用状态不能点击，我们还要依靠js来实现，或者将这两状态下的a标签换成span标签。
+
+大小设置：
+
+在Bootstrap框架中，也可以通过几个不同的情况来设置其大小。类似于按钮一样：
+
+1、通过“pagination-lg”让分页导航变大；
+
+2、通过“pagination-sm”让分页导航变小：
+
+<ul class="pagination pagination-lg">
+ …
+</ul>
+<ul class="pagination">
+ …
+</ul>
+<ul class="pagination pagination-sm">
+ …
+</ul>
+运行效果查看最右侧结果窗口。
+
+大小设置实现原理：
+
+其实就是通增加相应的padding大小、font-size大小和圆角大小，源码查看bootstrap.css文件第4193行～第4222行，
+这30行代码已从原文中节取出来，放在右侧代码顶部“bootstrap.css”文件中，小伙伴们可以查看。
