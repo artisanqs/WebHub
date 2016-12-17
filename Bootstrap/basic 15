@@ -1,0 +1,218 @@
+
+
+标签
+在Bootstrap框架中特意将这样的效果提取出来成为一个标签组件，并且以“.label”样式来实现高亮显示。
+
+既然他是一个独立的组件，当然在不同的版本下有不同的文件：
+
+   ☑   LESS版本：对应的源文件label.less
+
+   ☑   Sass版本：对应的源文件_label.scss
+
+   ☑   编译后版本：bootstrap.css文件第4261行～第4327行
+
+使用原理：
+
+使用方法很简单，你可以在使用span这样的行内标签：
+
+<h3>Example heading <span class="label label-default">New</span></h3>
+运行效果见右侧结果窗口。
+
+实现原理：
+
+/*bootstrap.css文件第4261行～第4272行*/
+
+.label {
+display: inline;
+padding: .2em .6em .3em;
+font-size: 75%;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+border-radius: .25em;
+}
+如果使用的是a标签元素来制作的话，为了让其更美观，在hover状态去掉下划线之类：
+
+/*bootstrap.css文件第4273行～4278行*/
+
+.label[href]:hover,
+.label[href]:focus {
+color: #fff;
+text-decoration: none;
+cursor: pointer;
+}
+有的时候标签内没有内容的时候，可以借助CSS3的:empty伪元素将其隐藏：
+
+.label:empty {
+display: none;
+}
+颜色样式设置：
+
+和按钮元素button类似，label样式也提供了多种颜色：
+
+  ☑   label-deafult:默认标签，深灰色
+
+  ☑   label-primary：主要标签，深蓝色
+
+  ☑   label-success：成功标签，绿色
+
+  ☑   label-info：信息标签，浅蓝色
+
+  ☑   label-warning：警告标签，橙色
+
+  ☑   label-danger：错误标签，红色
+
+主要是通过这几个类名来修改背景颜色和文本颜色：
+
+<span class="label label-default">默认标签</span>
+<span class="label label-primary">主要标签</span>
+<span class="label label-success">成功标签</span>
+<span class="label label-info">信息标签</span>
+<span class="label label-warning">警告标签</span>
+<span class="label label-danger">错误标签</span>
+运行效果见右侧结果窗口。
+
+颜色实现原理：
+
+/*bootstrap.css文件第4286行～第4237行*/
+
+.label-default {
+background-color: #999;
+}
+.label-default[href]:hover,
+.label-default[href]:focus {
+background-color: #808080;
+}
+.label-primary {
+background-color: #428bca;
+}
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+background-color: #3071a9;
+}
+.label-success {
+background-color: #5cb85c;
+}
+.label-success[href]:hover,
+.label-success[href]:focus {
+background-color: #449d44;
+}
+.label-info {
+background-color: #5bc0de;
+}
+.label-info[href]:hover,
+.label-info[href]:focus {
+background-color: #31b0d5;
+}
+.label-warning {
+background-color: #f0ad4e;
+}
+.label-warning[href]:hover,
+.label-warning[href]:focus {
+background-color: #ec971f;
+}
+.label-danger {
+background-color: #d9534f;
+}
+.label-danger[href]:hover,
+.label-danger[href]:focus {
+background-color: #c9302c;
+}
+
+
+
+
+徽章
+在Bootstrap框架中，把这种效果称作为徽章效果，使用“badge”样式来实现。
+
+对应的文件版本：
+
+  ☑   LESS版本:源文件badges.less
+
+  ☑   Sass版本：源文件_badges.scss
+
+  ☑   编译后版本：bootstrap.css文件第4328行～第4366行
+
+使用方法：
+
+使用方法，其实也没什么太多可说的，你可以像标签一样，使用span标签来制作，然后为他加入badge类：
+
+<a href="#">Inbox <span class="badge">42</span></a>
+运行效果见右侧结果窗口。
+
+实现原理：
+
+主要将其设置为椭圆形，并且加了一个背景色：
+
+/*bootstrap.css文件第4328行～第4341行*/
+
+.badge {
+display: inline-block;
+min-width: 10px;
+padding: 3px 7px;
+font-size: 12px;
+font-weight: bold;
+line-height: 1;
+color: #fff;
+text-align: center;
+white-space: nowrap;
+vertical-align: baseline;
+background-color: #999;
+border-radius: 10px;
+}
+同样也使用:empty伪元素，当没有内容的时候隐藏：
+
+.badge:empty {
+display: none;
+}
+正如开头所说，可以将徽章与按钮或者导航之类配合使用：
+
+<div class="navbar navbar-default" role="navigation">
+　<div class="navbar-header">
+　       <a href="##" class="navbar-brand">慕课网</a>
+　</div>
+  <ul class="nav navbar-nav">
+         <li class="active"><a href="##">网站首页</a></li>
+         <li><a href="##">系列教程</a></li>
+         <li><a href="##">名师介绍</a></li>
+         <li><a href="##">成功案例<span class="badge">23</span></a></li>
+         <li><a href="##">关于我们</a></li>
+  </ul>
+</div>
+运行效果见右侧结果窗口。
+
+按钮和胶囊形导航设置徽章：
+
+另外，徽章在按钮元素button和胶囊形导航nav-pills也可以有类似的样式，只不过是颜色不同而以：
+
+<ul class="nav nav-pills">
+  <li class="active"><a href="#">Home <span class="badge">42</span></a></li>
+   …
+  <li><a href="#">Messages<span class="badge">3</span></a></li>
+</ul>
+<ul class="navnav-pills nav-stacked" style="max-width: 260px;">
+<li class="active">
+<a href="#">
+  <span class="badge pull-right">42</span>
+          Home
+</a>
+</li>
+…
+<li>
+<a href="#">
+    <span class="badge pull-right">3</span>
+          Messages
+</a>
+</li>
+</ul>
+<button class="btnbtn-primary" type="button">
+      Messages <span class="badge">4</span>
+</button>
+运行效果见右侧结果窗口。
+
+样式代码请查看bootstrap.css文件第4345行～第4366行，这20多行代码已从原文中节取出来，放在右侧代码顶部“bootstrap.css”文件中，小伙伴们可以查看。
+
+注意：不过和标签组件不一样的是：在徽章组件中没有提供多种颜色风格的效果，不过你也可以通过badges.less或者_badges.scss快速自定义。此处对不做过多阐述。
