@@ -1,0 +1,125 @@
+
+
+缩略图
+缩略图在网站中最常用的地方就是产品列表页面，一行显示几张图片，有的在图片底下（左侧或右侧）带有标题、描述等信息。Bootstrap框架将这一部独立成一个模块组件。并通过“thumbnail”样式配合bootstrap的网格系统来实现。可以将产品列表页变得更好看。
+
+源码文件：
+
+  ☑  LESS版本：对应文件thumbnails.less
+
+  ☑  Sass版本：对应文件_thumbnails.scss
+
+  ☑ 编译后版本：bootstrap.css文件第4402行～第4426行
+
+使用方法：
+
+通过“thumbnail”样式配合bootstrap的网格系统来实现。
+
+
+在仅有缩略图的基础上，添加了一个div名为“caption“的容器，在这个容器中放置其他内容，比如说标题，文本描述，按钮等：
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="thumbnail">
+                <img src="http://a.hiphotos.baidu.com/image/w%3D400/sign=c56d7638b0b7d0a27bc9059dfbee760d/3b292df5e0fe9925d46873da36a85edf8cb171d7.jpg" style="height: 180px; width: 100%; display: block;" alt="">
+            </a>
+            <div class="caption">
+                <h3>Bootstrap框架系列教程</h3>
+                <p>Bootstrap框架是一个优秀的前端框，就算您是一位后端程序员或者你是一位不懂设计的前端人员，
+                你也能依赖于Bootstrap制作做优美的网站...</p>
+                <p>
+                    <a href="##" class="btn btn-primary">开始学习</a>
+                    <a href="##" class="btn btn-info">正在学习</a>
+                </p>
+            </div>
+        </div>
+    …
+    </div>
+</div>
+
+
+
+警示框
+在Bootstrap框架有一个独立的组件，实现上述的效果，这个组件被称为警示框。
+
+源码版本：
+
+☑ LESS版本：对应的源码文件alerts.less
+
+☑ Sass版本：对应的源码文件_alerts.scss
+
+☑ 编译后的版本：bootstrap.css文件第4427行～第4499行
+
+
+
+警示框--默认警示框
+Bootstrap框架通过“alert“样式来实现警示框效果。在默认情况之下，提供了四种不同的警示框效果：
+
+  1、成功警示框：告诉用用户操作成功，在“alert”样式基础上追加“alert-success”样式，具体呈现的是背景、边框和文本都是绿色；
+
+  2、信息警示框：给用户提供提示信息，在“alert”样式基础上追加“alert-info”样式，具体呈现的是背景、边框和文本都是浅蓝色；
+
+  3、警告警示框：提示用户小心操作（提供警告信息），在“alert”样式基础上追加“alert-warning”样式，具体呈现的是背景、边框、文本都是浅黄色；
+
+  4、错误警示框：提示用户操作错误，在“alert”样式基础上追加“alert-danger”样式，具体呈现的是背景、边框和文本都是浅红色。
+  
+  
+  
+  
+ 警示框--可关闭的警示框
+ 大家在平时浏览网页的时候，会发现一些警示框带有关闭按钮，用户一点击关闭按钮就能自动关闭显示的警示框（也就是让警示框隐藏不显示）。
+ 在Bootstrap框架中的警示框也具有这样的功能。
+
+使用方法：
+
+只需要在默认的警示框里面添加一个关闭按钮。然后进行三个步骤：
+
+  1、需要在基本警示框“alert”的基础上添加“alert-dismissable”样式。
+
+  2、在button标签中加入class="close"类，实现警示框关闭按钮的样式。
+
+  3、要确保关闭按钮元素上设置了自定义属性：“data-dismiss="alert"”（因为可关闭警示框需要借助于Javascript来检测该属性，从而控制警示框的关闭）。
+
+具体使用如下：
+
+<div class="alert alert-success alert-dismissable" role="alert">
+    <button class="close" type="button" data-dismiss="alert">&times;</button>
+    恭喜您操作成功！
+</div>
+
+
+
+警示框--警示框的链接
+有时候你可能想在警示框中加入链接地址，用来告诉用户跳到某一个地方或新的页面。而这个时候你又想让用户能明显的看出来这是链接地址。
+在Bootstrap框架中对警示框里的链接样式做了一个高亮显示处理。为不同类型的警示框内的链接进行了加粗处理，并且颜色相应加深。
+
+实现方法：
+
+Bootstrap框架是通过给警示框加的链接添加一个名为“alert-link”的类名，通过“alert-link”样式给链接提供高亮显示。
+
+具体使用如下：
+
+<div class="alert alert-success" role="alert">
+    <strong>Well done!</strong> 
+    You successfully read 
+    <a href="#" class="alert-link">this important alert message</a>
+    .
+</div>
+<div class="alert alert-info" role="alert">
+    <strong>Heads up!</strong>
+     This 
+     <a href="#" class="alert-link">alert needs your attention</a>
+     , but it's not super important.
+</div>
+<div class="alert alert-warning" role="alert">
+    <strong>Warning!</strong>
+     Better check yourself, you're 
+     <a href="#" class="alert-link">not looking too good</a>
+     .
+</div>
+<div class="alert alert-danger" role="alert">
+    <strong>Oh snap!</strong>
+    <a href="#" class="alert-link">Change a few things up</a>
+     and try submitting again.
+</div>
