@@ -1,0 +1,183 @@
+
+
+导入JavaScript插件
+Bootstrap除了包含丰富的Web组件之外，如前面介绍的下拉菜单、按钮组、导航、分页等。他还包括一些JavaScript的插件。
+
+Bootstrap的JavaScript插件可以单独导入到页面中，也可以一次性导入到页面中。
+因为在Bootstrap中的JavaScript插件都是依赖于jQuery库，所以不论是单独导入还一次性导入之前必须先导入jQuery库。
+
+一次性导入：
+
+Bootstrap提供了一个单一的文件，这个文件包含了Bootstrap的所有JavaScript插件，即bootstrap.js（压缩版本：bootstrap.min.js）。
+
+具体使用如下（或见右侧代码编辑器28-29行）：
+
+<!—导入jQuery版本库，因为Bootstrap的JavaScript插件依赖于jQuery -->
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<!—- 一次性导入所有Bootstrap的JavaScript插件（压缩版本） -->
+<script src="js/bootstrap.min.js"></script>
+特别声明：jQuery版本库也可以加载你本地的jQuery版本。
+
+单独导入：
+
+为方便单独导入特效文件，Bootstrap V3.2中提供了12种JavaScript插件，他们分别是：
+
+  ☑ 动画过渡（Transitions）:对应的插件文件“transition.js”
+
+  ☑ 模态弹窗（Modal）:对应的插件文件“modal.js”
+
+  ☑ 下拉菜单（Dropdown）：对应的插件文件“dropdown.js”
+
+  ☑ 滚动侦测（Scrollspy）：对应的插件文件“scrollspy.js”
+
+  ☑ 选项卡（Tab）：对应的插件文件“tab.js”
+
+  ☑ 提示框（Tooltips）：对应的插件文件“tooltop.js”
+
+  ☑ 弹出框（Popover）：对应的插件文件“popover.js”
+
+  ☑ 警告框（Alert）：对应的插件文件“alert.js”
+
+  ☑ 按钮（Buttons）：对应的插件文件“button.js”
+
+  ☑ 折叠/手风琴（Collapse）：对应的插件文件“collapse.js”
+
+  ☑ 图片轮播Carousel：对应的插件文件“carousel.js”
+
+  ☑ 自动定位浮标Affix：对应的插件文件“affix.js”
+  
+  
+  
+  
+  
+  动画过渡（Transitions）
+  这一小节我们先来讲“动画过渡（Transitions）”这个插件的使用，源文件：transition.js
+
+Bootstrap框架默认给各个组件提供了基本动画的过渡效果，如果要使用，有两种方法：
+
+  ☑ 调用统一编译的bootstrap.js；
+
+  ☑ 调用单一的过渡动画的JavaScript插件文件transition.js（右侧第29行引入Bootstrap上对外公布的transition.js的地址）。
+
+transition.js文件为Bootstrap具有过渡动画效果的组件提供了动画过渡效果。不过需要注意的是，
+这些过渡动画都是采用CSS3来实现的，所以IE6-8浏览器是不具备这些过渡动画效果。
+
+默认情况之下，Bootstrap框架中以下组件使用了过渡动画效果：
+
+  ☑ 模态弹出窗（Modal）的滑动和渐变效果；
+
+  ☑ 选项卡（Tab）的渐变效果；
+
+  ☑ 警告框（Alert）的渐变效果；
+
+  ☑ 图片轮播（Carousel）的滑动效果。
+
+右侧举了一个“模态弹出窗（Modal）的滑动和渐变效果”源代码例子。
+
+
+
+
+
+
+模态弹出框（Modals）
+这一小节我们先来讲解一个“模态弹出框”，插件的源文件：modal.js。
+
+右侧代码编辑器（30行）就是单独引入 bootstrap 中发布出的“modal.js”文件。
+
+样式代码：
+
+  ☑ LESS版本：modals.less
+
+  ☑ Sass版本：_modals.scss
+
+  ☑ 编译后的Bootstrap：对应bootstrap.css文件第5375行～第5496行
+
+在 Bootstrap 框架中把模态弹出框统一称为 Modal。这种弹出框效果在大多数 Web 网站的交互中都可见。
+
+
+模态弹出框--结构分析
+Bootstrap框架中的模态弹出框，分别运用了“modal”、“modal-dialog”和“modal-content”样式，
+而弹出窗真正的内容都放置在“modal-content”中，其主要又包括三个部分：
+
+  ☑ 弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮
+
+  ☑ 弹出框主体，一般使用“modal-body”表示，弹出框的主要内容
+
+  ☑ 弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮
+  
+  模态弹出窗的结构如下：
+
+<div class="modal show">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;
+                </span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">模态弹出窗标题</h4>
+            </div>
+            <div class="modal-body">
+                <p>模态弹出窗主体内容</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+弹出窗的主体样式实现：
+
+但是对于一个模态弹出窗而言，modal-content才是样式的关键。其主要设置了弹出窗的边框、边距、背景色和阴影等样式。
+
+/*bootstrap.css文件第5412行～第5423行*/
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+}
+除此之外，modal-content中的modal-header、modal-body和modal-footer三个部分样式设置：
+
+/*bootstrap.css文件第5441行～第5461行*/
+.modal-header {
+  min-height: 16.42857143px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.modal-header .close {
+  margin-top: -2px;
+}
+.modal-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
+.modal-body {
+  position: relative;
+  padding: 15px;
+}
+.modal-footer {
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+这三个部分主要控制一些间距的样式。而modal-footer都是用来放置按钮，所以底部还对包含的按钮做了一定的样式处理。
+
+/*bootstrap.css文件第5462行～第5471行*/
+.modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+ 
+  
