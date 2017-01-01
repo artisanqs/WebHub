@@ -1,0 +1,102 @@
+认识DOM
+文档对象模型DOM（Document Object Model）定义访问和处理HTML文档的标准方法。DOM 将HTML文档呈现为带有元素、属性和文本的树结构（节点树）。
+
+
+getElementsByName()方法
+返回带有指定名称的节点对象的集合。
+
+语法：
+
+document.getElementsByName(name)
+与getElementById() 方法不同的是，通过元素的 name 属性查询元素，而不是通过 id 属性。
+
+注意:
+
+1. 因为文档中的 name 属性可能不唯一，所有 getElementsByName() 方法返回的是元素的数组，而不是一个元素。
+
+2. 和数组类似也有length属性，可以和访问数组一样的方法来访问，从0开始。
+
+
+
+getElementsByTagName()方法
+
+返回带有指定标签名的节点对象的集合。返回元素的顺序是它们在文档中的顺序。
+
+语法:
+
+document.getElementsByTagName(Tagname)
+说明:
+
+1. Tagname是标签的名称，如p、a、img等标签名。
+
+2. 和数组类似也有length属性，可以和访问数组一样的方法来访问，所以从0开始。
+
+
+区别getElementByID,getElementsByName,getElementsByTagName
+以人来举例说明，人有能标识身份的身份证，有姓名，有类别(大人、小孩、老人)等。
+
+1. ID 是一个人的身份证号码，是唯一的。所以通过getElementById获取的是指定的一个人。
+
+2. Name 是他的名字，可以重复。所以通过getElementsByName获取名字相同的人集合。
+
+3. TagName可看似某类，getElementsByTagName获取相同类的人集合。如获取小孩这类人，getElementsByTagName("小孩")。
+
+把上面的例子转换到HTML中，如下:
+
+<input type="checkbox" name="hobby" id="hobby1">  音乐
+input标签就像人的类别。
+
+name属性就像人的姓名。
+
+id属性就像人的身份证。
+
+
+注意：方法区分大小写
+
+通过下面的例子(6个name="hobby"的复选项，两个按钮)来区分三种方法的不同:
+
+  <input type="checkbox" name="hobby" id="hobby1">  音乐
+  <input type="checkbox" name="hobby" id="hobby2">  登山
+  <input type="checkbox" name="hobby" id="hobby3">  游泳
+  <input type="checkbox" name="hobby" id="hobby4">  阅读
+  <input type="checkbox" name="hobby" id="hobby5">  打球
+  <input type="checkbox" name="hobby" id="hobby6">  跑步 
+  <input type="button" value = "全选" id="button1">
+  <input type="button" value = "全不选" id="button1">
+1. document.getElementsByTagName("input")，结果为获取所有标签为input的元素，共8个。
+
+2. document.getElementsByName("hobby")，结果为获取属性name="hobby"的元素，共6个。
+
+3. document.getElementById("hobby6")，结果为获取属性id="hobby6"的元素，只有一个，"跑步"这个复选项
+
+
+
+getAttribute()方法
+通过元素节点的属性名称获取属性的值。
+
+语法：
+
+elementNode.getAttribute(name)
+说明:
+
+1. elementNode：使用getElementById()、getElementsByTagName()等方法，获取到的元素节点。
+
+2. name：要想查询的元素节点的属性名字
+
+
+setAttribute()方法setAttribute() 方法增加一个指定名称和值的新属性，或者把一个现有的属性设定为指定的值。
+
+语法：
+
+elementNode.setAttribute(name,value)
+说明：
+
+1.name: 要设置的属性名。
+
+2.value: 要设置的属性值。
+
+注意：
+
+1.把指定的属性设置为指定的值。如果不存在具有指定名称的属性，该方法将创建一个新属性。
+
+2.类似于getAttribute()方法，setAttribute()方法只能通过元素节点对象调用的函数。
