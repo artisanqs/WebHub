@@ -1,0 +1,58 @@
+
+访问兄弟节点
+1. nextSibling 属性可返回某个节点之后紧跟的节点（处于同一树层级中）。
+
+语法：
+
+nodeObject.nextSibling
+说明：如果无此节点，则该属性返回 null。
+
+2. previousSibling 属性可返回某个节点之前紧跟的节点（处于同一树层级中）。
+
+语法：
+
+nodeObject.previousSibling  
+说明：如果无此节点，则该属性返回 null。
+
+注意: 两个属性获取的是节点。Internet Explorer 会忽略节点间生成的空白文本节点（例如，换行符号），而其它浏览器不会忽略。
+
+
+插入节点appendChild()
+在指定节点的最后一个子节点列表之后添加一个新的子节点。
+
+语法:
+
+appendChild(newnode)
+参数:
+
+newnode：指定追加的节点。
+
+
+插入节点insertBefore()
+
+insertBefore() 方法可在已有的子节点前插入一个新的子节点。
+
+语法:
+
+insertBefore(newnode,node);
+
+参数:
+
+newnode: 要插入的新节点。
+
+node: 指定此节点前插入节点。
+
+
+
+
+删除节点removeChild()
+removeChild() 方法从子节点列表中删除某个节点。如删除成功，此方法可返回被删除的节点，如失败，则返回 NULL。
+
+语法:
+
+nodeObject.removeChild(node)
+参数:
+
+node ：必需，指定需要删除的节点。
+
+注意: 把删除的子节点赋值给 x，这个子节点不在DOM树中，但是还存在内存中，可通过 x 操作。
