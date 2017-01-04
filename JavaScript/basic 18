@@ -1,0 +1,79 @@
+删除节点removeChild()
+
+removeChild() 方法从子节点列表中删除某个节点。如删除成功，此方法可返回被删除的节点，如失败，则返回 NULL。
+
+语法:
+
+nodeObject.removeChild(node)
+参数:
+
+node ：必需，指定需要删除的节点。
+
+
+替换元素节点replaceChild()
+
+replaceChild 实现子节点(对象)的替换。返回被替换对象的引用。 
+
+语法：
+
+node.replaceChild (newnode,oldnew ) 
+参数：
+
+newnode : 必需，用于替换 oldnew 的对象。 
+oldnew : 必需，被 newnode 替换的对象。
+
+
+
+创建元素节点createElement
+
+createElement()方法可创建元素节点。此方法可返回一个 Element 对象。
+
+语法：
+
+document.createElement(tagName)
+参数:
+
+tagName：字符串值，这个字符串用来指明创建元素的类型。
+
+注意：要与appendChild() 或 insertBefore()方法联合使用，将元素显示在页面中。
+
+我们来创建一个按钮，代码如下：
+
+<script type="text/javascript">
+   var body = document.body; 
+   var input = document.createElement("input");  
+   input.type = "button";  
+   input.value = "创建一个按钮";  
+   body.appendChild(input);  
+ </script>  
+效果：在HTML文档中，创建一个按钮。
+
+我们也可以使用setAttribute来设置属性，代码如下：
+
+<script type="text/javascript">  
+   var body= document.body;             
+   var btn = document.createElement("input");  
+   btn.setAttribute("type", "text");  
+   btn.setAttribute("name", "q");  
+   btn.setAttribute("value", "使用setAttribute");  
+   btn.setAttribute("onclick", "javascript:alert('This is a text!');");       
+   body.appendChild(btn);  
+</script>  
+效果：在HTML文档中，创建一个文本框，使用setAttribute设置属性值。 当点击这个文本框时，会弹出对话框“This is a text!”。
+
+
+
+
+
+
+
+创建文本节点createTextNode
+
+createTextNode() 方法创建新的文本节点，返回新创建的 Text 节点。
+
+语法：
+
+document.createTextNode(data)
+参数：
+
+data : 字符串值，可规定此节点的文本。
